@@ -218,7 +218,7 @@ export default function GreenCreditsWallet({
                      disabled:opacity-70
                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-400"
         >
-          {copyState === "copied" ? "Copied! ✓" : "Share impact"}
+          {copyState === "copied" ? "Copied to clipboard" : "Share impact"}
         </button>
 
         {/* Fallback textarea — shown only if clipboard API is unavailable */}

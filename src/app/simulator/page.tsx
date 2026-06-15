@@ -9,7 +9,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import RoutingSimulator from "@/components/simulator/RoutingSimulator";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Routing Simulator — Second Life Commerce",
@@ -66,10 +66,11 @@ export default function SimulatorPage() {
           <Link
             href="/grade"
             id="go-grade-from-simulator"
-            className="rounded-xl bg-brand-500 text-brand-950 px-6 py-3 text-sm font-semibold
+            className="inline-flex items-center gap-2 rounded-xl bg-brand-500 text-brand-950 px-6 py-3 text-sm font-semibold
                        hover:bg-brand-400 transition-all"
           >
-            Grade a real item →
+            Grade a real item
+            <ArrowRight className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
           </Link>
           <Link
             href="/dashboard"

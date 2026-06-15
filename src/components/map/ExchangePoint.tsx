@@ -88,7 +88,7 @@ function ExchangePointList({ points, activeFilter }: ExchangePointListProps) {
               aria-label={`Get directions to ${point.name}`}
               className="shrink-0 text-[11px] font-semibold text-blue-500 hover:text-blue-400 transition-colors whitespace-nowrap"
             >
-              Directions →
+              Get directions
             </a>
           </li>
         );

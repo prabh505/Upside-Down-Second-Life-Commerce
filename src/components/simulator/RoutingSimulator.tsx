@@ -19,6 +19,8 @@
  */
 
 import { useState, useMemo, useCallback } from "react";
+import { Store, Wrench, HandHeart, Recycle, RefreshCw } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { Grade } from "@/lib/types";
 import { GRADE_COLORS } from "@/lib/constants";
 
@@ -54,12 +56,12 @@ const DECISION_BG: Record<SimDecision, string> = {
   Exchange:  "rgba(13,148,136,0.08)",
 };
 
-const DECISION_ICONS: Record<SimDecision, string> = {
-  Resell:    "🏪",
-  Refurbish: "🔧",
-  Donate:    "🤝",
-  Recycle:   "♻️",
-  Exchange:  "🔄",
+const DECISION_ICONS: Record<SimDecision, LucideIcon> = {
+  Resell:    Store,
+  Refurbish: Wrench,
+  Donate:    HandHeart,
+  Recycle:   Recycle,
+  Exchange:  RefreshCw,
 };
 
 const GRADES: Grade[] = ["A", "B", "C", "D", "E"];
@@ -225,7 +227,7 @@ export default function RoutingSimulator({
   // Colors for this decision
   const decisionColor = DECISION_COLORS[simResult.decision];
   const decisionBg = DECISION_BG[simResult.decision];
-  const decisionIcon = DECISION_ICONS[simResult.decision];
+  const DecisionIcon = DECISION_ICONS[simResult.decision];
 
   // ── Track fill color for range inputs — CSS variable trick ───────────────
   // We pass a CSS custom property for the filled portion.
@@ -500,8 +502,12 @@ export default function RoutingSimulator({
               aria-atomic="true"
               aria-label={`Routing decision: ${simResult.decision}`}
             >
-              <span className="text-3xl select-none" aria-hidden="true">
-                {decisionIcon}
+              <span
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+                style={{ backgroundColor: decisionColor + "1f", color: decisionColor }}
+                aria-hidden="true"
+              >
+                <DecisionIcon className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest mb-0.5"

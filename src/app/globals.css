@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 /* ── CSS custom properties ──────────────────────────────────────────────── */
+/* Amazon-inspired: cool slate/ink surfaces, signature orange accent. */
 :root {
-  --background: #0a0f0d;
-  --foreground: #f0fdf4;
-  --card: #111a14;
-  --card-border: #1e3a27;
-  --muted: #1e3a27;
-  --muted-foreground: #86efac;
-  --accent: #22c55e;
-  --accent-foreground: #052e16;
+  --background: #0d141d;
+  --foreground: #f6f8fa;
+  --card: #131d29;
+  --card-border: #233140;
+  --muted: #1b2734;
+  --muted-foreground: #a7b3c1;
+  --accent: #ff9900;
+  --accent-soft: #ffa424;
+  --accent-foreground: #0d141d;
   --destructive: #ef4444;
   --radius: 0.75rem;
 }
@@ -34,6 +36,12 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), system-ui, sans-serif;
   min-height: 100dvh;
+  /* Two faint warm/cool glows give the flat dark canvas some depth without
+     looking like a templated "AI gradient hero". */
+  background-image:
+    radial-gradient(60rem 60rem at 85% -10%, rgba(255, 153, 0, 0.06), transparent 60%),
+    radial-gradient(50rem 50rem at -5% 110%, rgba(35, 49, 64, 0.5), transparent 55%);
+  background-attachment: fixed;
 }
 
 /* ── Scrollbar styling ──────────────────────────────────────────────────── */
@@ -53,7 +61,7 @@ body {
 
 /* ── Selection ──────────────────────────────────────────────────────────── */
 ::selection {
-  background-color: rgba(34, 197, 94, 0.25);
+  background-color: rgba(255, 153, 0, 0.28);
   color: var(--foreground);
 }
 
@@ -61,4 +69,12 @@ body {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* ── Utility: thin orange rule used as a section marker ─────────────────── */
+.rule-accent {
+  height: 2px;
+  width: 2.5rem;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
 }

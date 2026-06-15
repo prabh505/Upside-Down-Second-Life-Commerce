@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import { Recycle } from "lucide-react";
 import "./globals.css";
 import Providers from "./Providers";
 
@@ -79,22 +80,27 @@ export default function RootLayout({
         />
 
         <nav
-          className="flex flex-wrap items-center gap-x-4 px-4 py-2.5 border-b border-[var(--card-border)] bg-[var(--background)]"
+          className="sticky top-0 z-40 flex flex-wrap items-center gap-x-4 px-4 py-3 border-b border-[var(--card-border)] bg-[var(--background)]/85 backdrop-blur-md"
           aria-label="Main navigation"
         >
-          {/* Logo */}
+          {/* Logo / wordmark */}
           <Link
             href="/"
-            className="text-sm font-bold text-brand-100 tracking-tight mr-auto"
+            className="mr-auto flex items-center gap-2 tracking-tight"
           >
-            Second Life
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-500 text-brand-950">
+              <Recycle className="h-4 w-4" strokeWidth={2.25} aria-hidden="true" />
+            </span>
+            <span className="text-sm font-bold text-brand-50">
+              Second Life
+            </span>
           </Link>
 
           {/* Hamburger label (mobile only) */}
           <label
             htmlFor="nav-toggle"
             className="sm:hidden flex items-center justify-center w-8 h-8 rounded-lg
-                       text-brand-400 hover:text-brand-200 hover:bg-brand-900/50
+                       text-brand-300 hover:text-brand-50 hover:bg-[var(--muted)]
                        cursor-pointer transition-colors"
             aria-label="Toggle navigation menu"
           >
@@ -118,22 +124,22 @@ export default function RootLayout({
           >
             <Link
               href="/grade"
-              className="text-xs font-medium text-brand-400 hover:text-brand-200
-                         px-2 py-1.5 rounded-lg hover:bg-brand-900/50 transition-colors"
+              className="text-sm font-medium text-brand-300 hover:text-brand-50
+                         px-2.5 py-1.5 rounded-lg hover:bg-[var(--muted)] transition-colors"
             >
               Grade an item
             </Link>
             <Link
               href="/dashboard"
-              className="text-xs font-medium text-brand-400 hover:text-brand-200
-                         px-2 py-1.5 rounded-lg hover:bg-brand-900/50 transition-colors"
+              className="text-sm font-medium text-brand-300 hover:text-brand-50
+                         px-2.5 py-1.5 rounded-lg hover:bg-[var(--muted)] transition-colors"
             >
               Dashboard
             </Link>
             <Link
               href="/map"
-              className="text-xs font-medium text-brand-400 hover:text-brand-200
-                         px-2 py-1.5 rounded-lg hover:bg-brand-900/50 transition-colors"
+              className="text-sm font-medium text-brand-300 hover:text-brand-50
+                         px-2.5 py-1.5 rounded-lg hover:bg-[var(--muted)] transition-colors"
             >
               Exchange Map
             </Link>

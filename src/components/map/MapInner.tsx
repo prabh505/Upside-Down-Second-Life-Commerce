@@ -147,7 +147,7 @@ export default function MapInner({ points }: MapInnerProps) {
                 rel="noopener noreferrer"
                 className="text-xs font-semibold text-blue-600 hover:underline"
               >
-                Get directions →
+                Get directions
               </a>
             </div>
           </Popup>

@@ -14,6 +14,8 @@
  * local-buyers-only banner.
  */
 
+import { Store, Wrench, HandHeart, Recycle, RefreshCw, Search } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import type { RoutingOutcome } from "@/lib/types";
 import { ROUTING_OPTIONS, NEAR_EXPIRY_THRESHOLD_DAYS } from "@/lib/constants";
 
@@ -36,6 +38,16 @@ const ROUTE_COLORS: Record<RoutingOutcome | "human_review", { bg: string; text: 
   human_review: { bg: "bg-purple-50", text: "text-purple-800", border: "border-purple-200" },
 };
 
+/** Icon mapping for routing outcomes. */
+const ROUTE_ICONS: Record<RoutingOutcome | "human_review", LucideIcon> = {
+  resell: Store,
+  refurbish: Wrench,
+  donate: HandHeart,
+  recycle: Recycle,
+  exchange: RefreshCw,
+  human_review: Search,
+};
+
 export default function RoutingDecision({
   recommendedRoute,
   routingLogicTrace,
@@ -49,8 +61,9 @@ export default function RoutingDecision({
     : recommendedRoute;
 
   const colorSet = ROUTE_COLORS[effectiveRoute];
+  const RouteIcon = ROUTE_ICONS[effectiveRoute];
   const routeInfo = escalatedToHuman
-    ? { label: "Human Review", icon: "🔍", description: "Requires physical intake grading" }
+    ? { label: "Human Review", description: "Requires physical intake grading" }
     : ROUTING_OPTIONS[recommendedRoute];
 
   // Check for localOnly in the logic trace
@@ -66,8 +79,8 @@ export default function RoutingDecision({
       <div className={`px-5 py-4 ${colorSet.bg}`}>
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            <span className="text-2xl" aria-hidden="true">
-              {routeInfo.icon}
+            <span className={`shrink-0 ${colorSet.text}`} aria-hidden="true">
+              <RouteIcon className="h-6 w-6" strokeWidth={1.75} />
             </span>
             <div>
               <span className={`text-xl font-bold ${colorSet.text}`}>

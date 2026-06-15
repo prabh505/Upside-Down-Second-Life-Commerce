@@ -15,6 +15,7 @@
  * Date source badge: LABEL OCR / ESTIMATED / NOT AVAILABLE (monospaced).
  */
 
+import { CircleCheck, CircleX, TriangleAlert, Minus } from "lucide-react";
 import type { DatedCategory, EligibilityVerdict, DateSource } from "@/lib/types";
 
 interface ExpiryRowProps {
@@ -105,7 +106,7 @@ export default function ExpiryRow({
       <div className="flex items-center gap-2 min-w-0">
         {state === "valid" && (
           <>
-            <span className="text-green-600 text-sm shrink-0" aria-hidden="true">✓</span>
+            <CircleCheck className="h-4 w-4 shrink-0 text-green-600" strokeWidth={2} aria-hidden="true" />
             <span className="text-sm text-green-700 font-medium truncate">
               Valid until {formatDate(expiryDate)}
             </span>
@@ -113,7 +114,7 @@ export default function ExpiryRow({
         )}
         {state === "expired" && (
           <>
-            <span className="text-red-600 text-sm shrink-0" aria-hidden="true">✗</span>
+            <CircleX className="h-4 w-4 shrink-0 text-red-600" strokeWidth={2} aria-hidden="true" />
             <span className="text-sm text-red-700 font-semibold truncate">
               Expired {expiryDate ? formatDate(expiryDate) : ""}
             </span>
@@ -121,7 +122,7 @@ export default function ExpiryRow({
         )}
         {state === "near_expiry" && (
           <>
-            <span className="text-amber-600 text-sm shrink-0" aria-hidden="true">⚠</span>
+            <TriangleAlert className="h-4 w-4 shrink-0 text-amber-600" strokeWidth={2} aria-hidden="true" />
             <span className="text-sm text-amber-700 font-medium truncate">
               Near expiry — {formatDate(expiryDate)}
             </span>
@@ -129,7 +130,7 @@ export default function ExpiryRow({
         )}
         {state === "unknown" && (
           <>
-            <span className="text-gray-400 text-sm shrink-0" aria-hidden="true">—</span>
+            <Minus className="h-4 w-4 shrink-0 text-gray-400" strokeWidth={2} aria-hidden="true" />
             <span className="text-sm text-gray-500 font-medium">
               No date available
             </span>

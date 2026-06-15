@@ -11,6 +11,7 @@
  *   - Certification badge: SECOND LIFE CERTIFIED or FRONT-VIEW / PROVISIONAL
  */
 
+import { Check, TriangleAlert } from "lucide-react";
 import type { Grade, Tier } from "@/lib/types";
 import { GRADE_COLORS } from "@/lib/constants";
 
@@ -52,14 +53,14 @@ export default function GradeBand({
             {/* ── Certification badge ── */}
             {captureComplete ? (
               <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-white/90 bg-white/20 rounded px-1.5 py-0.5 w-fit">
-                <span aria-hidden="true">✓</span> Second Life Certified
+                <Check className="h-3 w-3" strokeWidth={3} aria-hidden="true" /> Second Life Certified
               </span>
             ) : (
               <span
                 className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest bg-amber-900/60 text-amber-100 rounded px-1.5 py-0.5 w-fit"
                 title="Grade covers visible front-of-item condition only. Physical intake grading applies for high-value and safety-critical items."
               >
-                <span aria-hidden="true">⚠</span> Front-view / Provisional
+                <TriangleAlert className="h-3 w-3" strokeWidth={2.5} aria-hidden="true" /> Front-view / Provisional
               </span>
             )}
           </div>

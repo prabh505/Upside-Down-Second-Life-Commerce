@@ -29,7 +29,7 @@ import SecondLifeScore from "@/components/score/SecondLifeScore";
 import GreenCreditsWallet from "@/components/wallet/GreenCreditsWallet";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Spinner from "@/components/ui/Spinner";
-import { ArrowLeft, AlertCircle, RefreshCcw } from "lucide-react";
+import { ArrowLeft, ArrowRight, AlertCircle, RefreshCcw } from "lucide-react";
 import Link from "next/link";
 
 // ── State machine type ────────────────────────────────────────────────────────
@@ -508,11 +508,12 @@ function GradePageInner() {
               <button
                 type="submit"
                 id="start-grading-btn"
-                className="rounded-xl bg-brand-500 text-brand-950 px-6 py-4 text-base font-semibold
+                className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-brand-500 text-brand-950 px-6 py-4 text-base font-semibold
                            hover:bg-brand-400 active:scale-[0.98] transition-all duration-150
-                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 mt-2"
+                           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
               >
-                Start grading →
+                Start grading
+                <ArrowRight className="h-5 w-5" strokeWidth={2} aria-hidden="true" />
               </button>
             </form>
           </div>

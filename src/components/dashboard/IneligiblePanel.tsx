@@ -12,7 +12,7 @@
  */
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { AlertOctagon } from "lucide-react";
+import { AlertOctagon, CircleCheck } from "lucide-react";
 
 interface IneligibleItem {
   name: string;
@@ -70,8 +70,9 @@ export default function IneligiblePanel({ items }: IneligiblePanelProps) {
   if (items.length === 0) {
     return (
       <div className="rounded-xl border-l-4 border-green-500 bg-green-950/30 px-5 py-4">
-        <p className="text-sm text-green-400 font-medium">
-          ✓ All items this week were eligible.
+        <p className="flex items-center gap-2 text-sm text-green-400 font-medium">
+          <CircleCheck className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden="true" />
+          All items this week were eligible.
         </p>
       </div>
     );

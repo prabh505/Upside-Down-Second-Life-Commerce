@@ -23,6 +23,7 @@
  */
 
 import { useState, useMemo, useEffect, useRef } from "react";
+import { ChevronDown } from "lucide-react";
 import type { Grade } from "@/lib/types";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -240,12 +241,11 @@ export default function SecondLifeScore({
                    flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 rounded"
       >
         What affects this score?
-        <span
+        <ChevronDown
           aria-hidden="true"
-          className={`transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
-        >
-          ▼
-        </span>
+          className={`h-3.5 w-3.5 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+          strokeWidth={2.5}
+        />
       </button>
 
       {/* ── Drill-down table ── */}
