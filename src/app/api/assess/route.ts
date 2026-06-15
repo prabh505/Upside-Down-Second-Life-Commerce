@@ -536,6 +536,32 @@ function toBedrockMediaType(mimeType: string): "image/jpeg" | "image/png" {
   return "image/jpeg";
 }
 
+// ── Robust JSON extraction from model output ──────────────────────────────────
+// Not every model is as strict as Claude about returning bare JSON. Amazon Nova
+// and others sometimes wrap the object in a ```json fence or a sentence of
+// prose ("Here is the assessment: { ... }"). Parse defensively so a chatty
+// reply doesn't trip the 422 path.
+function extractJsonObject(raw: string): unknown {
+  const text = raw.trim();
+
+  // 1. Prefer the contents of a fenced block if present.
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+  const candidate = fenced ? fenced[1].trim() : text;
+
+  // 2. Try a direct parse first (the common, well-behaved case).
+  try {
+    return JSON.parse(candidate);
+  } catch {
+    // 3. Fall back to the substring spanning the first '{' to the last '}'.
+    const first = candidate.indexOf("{");
+    const last = candidate.lastIndexOf("}");
+    if (first !== -1 && last > first) {
+      return JSON.parse(candidate.slice(first, last + 1));
+    }
+    throw new Error("No JSON object found in model output");
+  }
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // ROUTE HANDLER: POST /api/assess
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -823,13 +849,7 @@ export async function POST(request: NextRequest) {
 
     let modelOutput: BedrockModelOutput;
     try {
-      // Strip any accidental markdown code fences the model might add
-      const cleanedText = rawModelText
-        .replace(/^```json\s*/i, "")
-        .replace(/^```\s*/i, "")
-        .replace(/\s*```$/i, "")
-        .trim();
-      modelOutput = JSON.parse(cleanedText);
+      modelOutput = extractJsonObject(rawModelText) as BedrockModelOutput;
     } catch {
       return NextResponse.json(
         {

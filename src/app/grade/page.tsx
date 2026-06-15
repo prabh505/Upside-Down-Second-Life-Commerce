@@ -683,13 +683,25 @@ function GradePageInner() {
                 Try again
               </button>
 
-              <Link
-                href="/grade"
+              <button
+                onClick={() => {
+                  // Full reset — a <Link href="/grade"> does nothing when we're
+                  // already on /grade (same route → no remount), so reset state
+                  // directly instead.
+                  setErrorStatus(null);
+                  setErrorMessage("");
+                  setFrontFile(null);
+                  setLabelFile(null);
+                  setGradingResult(null);
+                  setProductName("");
+                  setMachineState(urlCategory ? "capturing_front" : "step0_form");
+                }}
+                id="start-over-from-error"
                 className="text-center rounded-xl border border-[var(--card-border)] bg-[var(--card)]
                            px-6 py-3 text-sm font-medium text-brand-400 hover:text-brand-200 transition-all"
               >
                 Start over
-              </Link>
+              </button>
             </div>
           </div>
         )}
