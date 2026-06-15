@@ -100,10 +100,14 @@ cp .env.example .env.local
 Edit `.env.local` with your credentials:
 
 ```env
-AWS_BEARER_TOKEN_BEDROCK=your_bearer_token_here
+AWS_BEARER_TOKEN_BEDROCK=your_long_term_bedrock_api_key
 BEDROCK_REGION=ap-south-1
-BEDROCK_MODEL_ID=anthropic.claude-sonnet-4-5-20251101-v1:0
+BEDROCK_MODEL_ID=global.anthropic.claude-haiku-4-5-20251001-v1:0
 ```
+
+> ⚠️ Use a **long-term** Bedrock API key — short-term keys expire in ~12 hours and will break a deployment.
+>
+> From **ap-south-1 (Mumbai)** the model is only reachable via the **global** inference profile (the `global.` prefix). Swap to `global.anthropic.claude-sonnet-4-6` if you want Sonnet 4.6 instead of Haiku 4.5. Make sure the model shows **Access granted** in Bedrock → Model access.
 
 > ⚠️ **These are server-side only variables.** They are NEVER exposed to the browser. Do not prefix with `NEXT_PUBLIC_`.
 
@@ -207,11 +211,11 @@ src/
 1. Push this repo to GitHub
 2. Go to [vercel.com/new](https://vercel.com/new)
 3. Import the `Upside-Down-Second-Life-Commerce` repository
-4. Add environment variables in project settings:
-   - `AWS_BEARER_TOKEN_BEDROCK` — your Bedrock bearer token
+4. Add environment variables in project settings (Production + Preview):
+   - `AWS_BEARER_TOKEN_BEDROCK` — your **long-term** Bedrock API key
    - `BEDROCK_REGION` — e.g. `ap-south-1`
-   - `BEDROCK_MODEL_ID` — e.g. `anthropic.claude-sonnet-4-5-20251101-v1:0`
-5. Deploy — Vercel auto-detects Next.js and configures everything
+   - `BEDROCK_MODEL_ID` — e.g. `global.anthropic.claude-haiku-4-5-20251001-v1:0`
+5. Deploy — Vercel auto-detects Next.js. **Re-deploy after any env var change**, since values are only injected at build time.
 
 ### vercel.json
 
