@@ -146,11 +146,11 @@ export default function CameraView({ step, onCapture }: CameraViewProps) {
 
       streamRef.current = stream;
 
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
-      }
-
+      // NOTE: we do NOT attach the stream to videoRef here. The <video>
+      // element is only rendered in the "active" state, so videoRef.current
+      // is still null at this point. Flipping to "active" mounts the video,
+      // and the effect below attaches the stream once it exists. Attaching
+      // here silently no-ops and leaves a black feed.
       setCameraState("active");
     } catch (err: unknown) {
       if (err instanceof DOMException) {
@@ -187,6 +187,24 @@ export default function CameraView({ step, onCapture }: CameraViewProps) {
       }
     };
   }, [startCamera]);
+
+  // ── Attach stream once the <video> is mounted ───────────────────────────────
+  // The <video> only exists in the "active" render. We must wait for that
+  // commit before assigning srcObject; doing it earlier (in startCamera) hits a
+  // null ref and leaves a black feed.
+  useEffect(() => {
+    if (cameraState !== "active") return;
+    const video = videoRef.current;
+    const stream = streamRef.current;
+    if (!video || !stream) return;
+
+    if (video.srcObject !== stream) {
+      video.srcObject = stream;
+    }
+    // playsInline + muted satisfy mobile autoplay policies; a rejected play()
+    // is a benign race (element not yet ready), so we swallow it.
+    video.play().catch(() => {});
+  }, [cameraState]);
 
   // ── Capture from video ──────────────────────────────────────────────────────
 
