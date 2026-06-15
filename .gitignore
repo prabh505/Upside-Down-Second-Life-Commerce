@@ -1,0 +1,37 @@
+# ── Dependencies ─────────────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Next.js build output ──────────────────────────────────────────────────────
+.next/
+out/
+
+# ── Environment — NEVER commit real credentials ───────────────────────────────
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# .env.example is intentionally NOT ignored — it is the documentation template.
+
+# ── Vercel ────────────────────────────────────────────────────────────────────
+.vercel
+
+# ── OS artefacts ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+.idea/
+*.swp
+*.swo
+
+# ── TypeScript cache ──────────────────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
+
+# ── Local project files — NOT for GitHub ──────────────────────────────────────
+context.md
+second-life-commerce-prd-final.md
+.gemini/
